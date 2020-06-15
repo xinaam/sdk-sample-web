@@ -27,11 +27,9 @@ Structurally, `mzaalo-auth` is the subset of `mzaalo-rewards`. This means, any a
  - Any web Browser
 
 ### Configuration
-Add `mzaalo-rewards` or `mzaalo-auth` to the script tag in your code:
+Add `mzaalo-sdk` to the script tag in your code:
 
-   <script async defer src='https://mzaalo.azure-api.net/sdks/mzaalo-xxxx.js'></script>
-
-where, **`xxxx`** can be `auth` or `rewards`
+   <script async defer src='https://mzaalo.azure-api.net/sdks/mzaalo-sdk.js'></script>
 
 ## Getting Started
     
