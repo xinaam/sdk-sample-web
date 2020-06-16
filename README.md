@@ -9,7 +9,7 @@ This repository contains the documentation for the integration of the Web SDKs o
 	 - [Configuration](#configuration)
 - [Getting Started](#getting-started)
 - [Features and Implementation](#features-and-implementation)
--[Sequence Flow](#sequence-flow)
+- [Sequence Flow](#sequence-flow)
 
 ## Overview
 Mzaalo SDKs have two modules:
