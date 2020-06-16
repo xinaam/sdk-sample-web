@@ -100,13 +100,14 @@ This is a feature that allows the application to register an action to the Mzaal
 | `MzaaloRewardsActionTypes.CONTENT_VIEWED` | Send this if you want to give rewards to the user for watching content |
 | `MzaaloRewardsActionTypes.CHECKED_IN` | Send this if you want to give rewards to the user for **launching the app** or **visiting some section of the app** on a daily basis |
 | `MzaaloRewardsActionTypes.SIGNED_UP` | Send this if you want to give reward to the user for signing up on your application. In this case, call this once the above mentioned login function has been successfully executed. |
-
+| `MzaaloRewardsActionTypes.REFERRAL_APPLIED` | When a user applies a referral code on the platform which he/she received from some other user previously. This will credit the rewards to the user who referred the current user. |
 
 Here are the valid `eventProperty` fields that can be put as keys in the `eventMeta` json:
 | eventProperty | MzaaloRewardsActionTypes | Description | Data type | Example |
 |--|--|--|--|--|
 | total_watch_time | `CONTENT_VIEWED` | The duration(in seconds) for which the user has watched the content | Integer | 600, (if the user watched a movie for ten minutes) |
-
+| referee_user_id | `REFERRAL_APPLIED` | Unique user ID of the user at your system who referred the current user | String | abcdefgh |
+| referee_user_meta | `REFERRAL_APPLIED` | This is the user meta of the person who referred this user. It's format is same as mentioned in the login function for `userMeta` parameter | Json Object | {"email":"johndoe@example.com"} |
 
 ### Fetch Reward Balance
 Call this function if you want to fetch the balance of the user that is currently logged in.
