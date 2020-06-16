@@ -97,5 +97,11 @@ Call this function if you want to fetch the balance of the user that is currentl
 ## Sequence Flow
 ### mzaalo-auth
 
-![]
+![Sequence flow diagram for mzaalo auth login and logout](https://xfinitesite.blob.core.windows.net/flow-diagrams/web-auth.png)
+
+### mzaalo-rewards
+
+![Sequence flow diagram from mzaalo rewards register action types](https://xfinitesite.blob.core.windows.net/flow-diagrams/web-rewards-rra.png)
+
+![Sequence flow diagram from mzaalo fetch balance](https://xfinitesite.blob.core.windows.net/flow-diagrams/web-rewards-gb.png)
 
