@@ -51,7 +51,15 @@ Your application should call the `MzaaloAuth.login()` function as soon as the us
     var userMeta = {
     	userProperty : value
     }
+    
     MzaaloAuth.login("UNIQUE_ID_OF_YOUR_USER", userMeta)
+    .then(response => {
+    	token : response.token
+	user : response.user
+    })
+    .catch(error => {
+    	error : error
+    })
 
 Here are the valid `userProperty` fields that can put as keys in the `userMeta` json:
 |userProperty|Description|Data type|Example|
@@ -65,6 +73,12 @@ Here are the valid `userProperty` fields that can put as keys in the `userMeta` 
 Your application should call `MzaaloAuth.logout()` function when the user logs out from your application or when the user identitiy is no longer available to you.
 
     MzaaloAuth.logout()
+    .then(response => {
+    	message : 'Logout successfully'
+    })
+    .catch(error => {
+    	error : error
+    })
 
 
 ### Register Rewards Action
@@ -73,7 +87,14 @@ This is a feature that allows the application to register an action to the Mzaal
     var eventMeta = {
     	eventProperty : value
     }
+    
     MzaaloRewards.registerRewardAction(MzaaloRewardsActionTypes.XXXX, eventMeta)
+    .then(response => {
+    	// you will get success response
+    })
+    .catch(error => {
+    	error : error
+    })
 
 `MzaaloRewardsActionTypes` is an enum class that describes the type of action that the user has performed. The enum has following options:
 | Enum Value | Description |
@@ -93,6 +114,12 @@ Here are the valid `eventProperty` fields that can be put as keys in the `eventM
 Call this function if you want to fetch the balance of the user that is currently logged in.
 
     MzaaloRewards.getBalance()
+    .then(response => {
+    	balance : response.balance
+    })
+    .catch(error => {
+    	error : error
+    })
 
 ## Sequence Flow
 ### mzaalo-auth
