@@ -14,12 +14,10 @@ This repository contains the documentation for the integration of the Web SDKs o
 ## Overview
 Mzaalo SDKs have two modules:
 
- 1. **mzaalo-auth** : This module contains authentication features like login, logout, etc.
- 2. **mzaalo-rewards** : This module contains all the authentication features, plus features of rewards like adding rewards, fetching balance, etc.
+ 1. **MzaaloAuth** : This module contains authentication features like login, logout, etc.
+ 2. **MzaaloRewards** : This module contains all the authentication features, plus features of rewards like adding rewards, fetching balance, etc.
 
-Both these modules are shippable as separate javascript libraries.
-Structurally, `mzaalo-auth` is the subset of `mzaalo-rewards`. This means, any application that includes the library for `mzaalo-rewards` automatically gets the functionality for `mzaalo-auth` out of the box.
-
+Both these modules are shippable under one javascript library. You can call `init` function with any of the module. 
     
 ## Installation
 
@@ -30,7 +28,7 @@ Structurally, `mzaalo-auth` is the subset of `mzaalo-rewards`. This means, any a
 ### Configuration
 Add `mzaalo-sdk` to the script tag in your code:
 
-   <script async defer src='https://mzaalo.azure-api.net/sdks/mzaalo-sdk.js'></script>
+   <script async defer src='mzaalo.azure-api.net/sdks/mzaalo-sdk.js'></script>
 
 ## Getting Started
     
@@ -55,7 +53,7 @@ Your application should call the `MzaaloAuth.login()` function as soon as the us
     MzaaloAuth.login("UNIQUE_ID_OF_YOUR_USER", userMeta)
     .then(response => {
     	// you will get response as user object
-	user : response
+		user : response
     })
     .catch(error => {
     	error : error
@@ -85,7 +83,7 @@ Your application should call `MzaaloAuth.logout()` function when the user logs o
 This is a feature that allows the application to register an action to the Mzaalo SDK, that should credit some rewards to the user.
 
     var eventMeta = {
-    	eventProperty : value
+    	[eventProperty] : value
     }
     
     MzaaloRewards.registerRewardAction(MzaaloRewardsActionTypes.XXXX, eventMeta)
