@@ -49,12 +49,13 @@ Here `MzaaloEnvironment` is an enum class with the following options:
 Your application should call the `MzaaloAuth.login()` function as soon as the user is identified at your end.
 
     var userMeta = {
-    	userProperty : value
+    	[userProperty] : value
     }
     
     MzaaloAuth.login("UNIQUE_ID_OF_YOUR_USER", userMeta)
     .then(response => {
-    	// You will get response with token and user data
+    	// you will get response as user object
+	user : response
     })
     .catch(error => {
     	error : error
@@ -114,7 +115,8 @@ Call this function if you want to fetch the balance of the user that is currentl
 
     MzaaloRewards.getBalance()
     .then(response => {
-    	balance : response.balance
+    	// You will get response as balance of the user
+    	balance : response
     })
     .catch(error => {
     	error : error
