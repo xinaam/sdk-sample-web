@@ -54,8 +54,7 @@ Your application should call the `MzaaloAuth.login()` function as soon as the us
     
     MzaaloAuth.login("UNIQUE_ID_OF_YOUR_USER", userMeta)
     .then(response => {
-    	token : response.token
-	user : response.user
+    	// You will get response with token and user data
     })
     .catch(error => {
     	error : error
@@ -74,7 +73,7 @@ Your application should call `MzaaloAuth.logout()` function when the user logs o
 
     MzaaloAuth.logout()
     .then(response => {
-    	message : 'Logout successfully'
+    	// You will get message as 'Logout successfully'
     })
     .catch(error => {
     	error : error
