@@ -9,6 +9,7 @@ This repository contains the documentation for the integration of the Web SDKs o
 	 - [Configuration](#configuration)
 - [Getting Started](#getting-started)
 - [Features and Implementation](#features-and-implementation)
+-[Sequence Flow](#sequence-flow)
 
 ## Overview
 Mzaalo SDKs have two modules:
@@ -24,7 +25,7 @@ Structurally, `mzaalo-auth` is the subset of `mzaalo-rewards`. This means, any a
 
 ### Requirements
 
- - Any web Browser
+ - Supported Browsers : Chrome, Firefox, Safari and IE8+ 
 
 ### Configuration
 Add `mzaalo-sdk` to the script tag in your code:
@@ -47,9 +48,9 @@ Here `MzaaloEnvironment` is an enum class with the following options:
 ### Login
 Your application should call the `MzaaloAuth.login()` function as soon as the user is identified at your end.
 
-	
-    val userMeta=JSONObject()
-    userMeta.put(userProperty, value)
+    var userMeta = {
+    	userProperty : value
+    }
     MzaaloAuth.login("UNIQUE_ID_OF_YOUR_USER", userMeta)
 
 Here are the valid `userProperty` fields that can put as keys in the `userMeta` json:
@@ -69,10 +70,10 @@ Your application should call `MzaaloAuth.logout()` function when the user logs o
 ### Register Rewards Action
 This is a feature that allows the application to register an action to the Mzaalo SDK, that should credit some rewards to the user.
 
-    val eventMeta=JSONObject()
-    eventMeta(eventProperty, value)
+    var eventMeta = {
+    	eventProperty : value
+    }
     MzaaloRewards.registerRewardAction(MzaaloRewardsActionTypes.XXXX, eventMeta)
-
 
 `MzaaloRewardsActionTypes` is an enum class that describes the type of action that the user has performed. The enum has following options:
 | Enum Value | Description |
@@ -80,7 +81,6 @@ This is a feature that allows the application to register an action to the Mzaal
 | `MzaaloRewardsActionTypes.CONTENT_VIEWED` | Send this if you want to give rewards to the user for watching content |
 | `MzaaloRewardsActionTypes.CHECKED_IN` | Send this if you want to give rewards to the user for **launching the app** or **visiting some section of the app** on a daily basis |
 | `MzaaloRewardsActionTypes.SIGNED_UP` | Send this if you want to give reward to the user for signing up on your application. In this case, call this once the above mentioned login function has been successfully executed. |
-
 
 
 Here are the valid `eventProperty` fields that can be put as keys in the `eventMeta` json:
@@ -93,3 +93,9 @@ Here are the valid `eventProperty` fields that can be put as keys in the `eventM
 Call this function if you want to fetch the balance of the user that is currently logged in.
 
     MzaaloRewards.getBalance()
+
+## Sequence Flow
+### mzaalo-auth
+
+![]
+
