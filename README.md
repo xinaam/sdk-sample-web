@@ -35,6 +35,12 @@ Add `mzaalo-sdk` to the script tag in your code:
 The entry point to the SDK is through the `init` function that gets called with a valid partner code and environment type(STAGING or PRODUCTION).
 
     MzaaloRewards.init("YOUR_PARTNER_CODE", MzaaloEnvironment)
+    .then(response => {
+    	// You will get message as 'Initialization Successful'
+    })
+    .catch(error => {
+    	error : error
+    })
 
 Here `MzaaloEnvironment` is an enum class with the following options:
 
