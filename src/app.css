@@ -1,0 +1,73 @@
+.form {
+
+}
+
+.form-control {
+    margin: 10px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+input {
+    padding: 10px;
+    width: 200px;
+}
+
+select {
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+}
+
+option {
+    padding: 10px;
+}
+
+.btn-main {
+    background-color: white;
+    color: black;
+    padding: 14px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 2px solid #e7e7e7;
+}
+
+.btn-main:hover {
+    background-color: #e7e7e7;
+}
+
+.init-container, .auth-container, .reward-container {
+    border: 1px solid gainsboro;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.balance-container, .rewardAction-container {
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.flex {
+    display: flex;
+    align-items: baseline;
+}
+
+.rewardAction-container {
+    width: 50%;
+}
+
+.balance {
+    padding: 10px;
+    background: whitesmoke;
+    text-align: center;
+}
