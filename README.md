@@ -14,12 +14,10 @@ This repository contains the documentation for the integration of the Web SDKs o
 ## Overview
 Mzaalo SDKs have two modules:
 
- 1. **mzaalo-auth** : This module contains authentication features like login, logout, etc.
- 2. **mzaalo-rewards** : This module contains all the authentication features, plus features of rewards like adding rewards, fetching balance, etc.
+ 1. **MzaaloAuth** : This module contains authentication features like login, logout, etc.
+ 2. **MzaaloRewards** : This module contains all the authentication features, plus features of rewards like adding rewards, fetching balance, etc.
 
-Both these modules are shippable as separate javascript libraries.
-Structurally, `mzaalo-auth` is the subset of `mzaalo-rewards`. This means, any application that includes the library for `mzaalo-rewards` automatically gets the functionality for `mzaalo-auth` out of the box.
-
+Both these modules are shippable under one javascript library. You can call `init` function with any of the module. 
     
 ## Installation
 
@@ -30,13 +28,19 @@ Structurally, `mzaalo-auth` is the subset of `mzaalo-rewards`. This means, any a
 ### Configuration
 Add `mzaalo-sdk` to the script tag in your code:
 
-   <script async defer src='https://mzaalo.azure-api.net/sdks/mzaalo-sdk.js'></script>
+   <script src = 'http://sdk.mzaalo.com/dist/mzaalo-sdk.min.js' ></script>
 
 ## Getting Started
     
 The entry point to the SDK is through the `init` function that gets called with a valid partner code and environment type(STAGING or PRODUCTION).
 
     MzaaloRewards.init("YOUR_PARTNER_CODE", MzaaloEnvironment)
+    .then(response => {
+    	// You will get message as 'Initialization Successful'
+    })
+    .catch(error => {
+    	error : error
+    })
 
 Here `MzaaloEnvironment` is an enum class with the following options:
 
@@ -49,9 +53,17 @@ Here `MzaaloEnvironment` is an enum class with the following options:
 Your application should call the `MzaaloAuth.login()` function as soon as the user is identified at your end.
 
     var userMeta = {
-    	userProperty : value
+    	[userProperty] : value
     }
+    
     MzaaloAuth.login("UNIQUE_ID_OF_YOUR_USER", userMeta)
+    .then(response => {
+    	// you will get response as user object
+		user : response
+    })
+    .catch(error => {
+    	error : error
+    })
 
 Here are the valid `userProperty` fields that can put as keys in the `userMeta` json:
 |userProperty|Description|Data type|Example|
@@ -65,15 +77,28 @@ Here are the valid `userProperty` fields that can put as keys in the `userMeta` 
 Your application should call `MzaaloAuth.logout()` function when the user logs out from your application or when the user identitiy is no longer available to you.
 
     MzaaloAuth.logout()
+    .then(response => {
+    	// You will get message as 'Logout successfully'
+    })
+    .catch(error => {
+    	error : error
+    })
 
 
 ### Register Rewards Action
 This is a feature that allows the application to register an action to the Mzaalo SDK, that should credit some rewards to the user.
 
     var eventMeta = {
-    	eventProperty : value
+    	[eventProperty] : value
     }
+    
     MzaaloRewards.registerRewardAction(MzaaloRewardsActionTypes.XXXX, eventMeta)
+    .then(response => {
+    	// you will get success response
+    })
+    .catch(error => {
+    	error : error
+    })
 
 `MzaaloRewardsActionTypes` is an enum class that describes the type of action that the user has performed. The enum has following options:
 | Enum Value | Description |
@@ -81,18 +106,26 @@ This is a feature that allows the application to register an action to the Mzaal
 | `MzaaloRewardsActionTypes.CONTENT_VIEWED` | Send this if you want to give rewards to the user for watching content |
 | `MzaaloRewardsActionTypes.CHECKED_IN` | Send this if you want to give rewards to the user for **launching the app** or **visiting some section of the app** on a daily basis |
 | `MzaaloRewardsActionTypes.SIGNED_UP` | Send this if you want to give reward to the user for signing up on your application. In this case, call this once the above mentioned login function has been successfully executed. |
-
+| `MzaaloRewardsActionTypes.REFERRAL_APPLIED` | When a user applies a referral code on the platform which he/she received from some other user previously. This will credit the rewards to the user who referred the current user. |
 
 Here are the valid `eventProperty` fields that can be put as keys in the `eventMeta` json:
 | eventProperty | MzaaloRewardsActionTypes | Description | Data type | Example |
 |--|--|--|--|--|
 | total_watch_time | `CONTENT_VIEWED` | The duration(in seconds) for which the user has watched the content | Integer | 600, (if the user watched a movie for ten minutes) |
-
+| referee_user_id | `REFERRAL_APPLIED` | Unique user ID of the user at your system who referred the current user | String | abcdefgh |
+| referee_user_meta | `REFERRAL_APPLIED` | This is the user meta of the person who referred this user. It's format is same as mentioned in the login function for `userMeta` parameter | Json Object | {"email":"johndoe@example.com"} |
 
 ### Fetch Reward Balance
 Call this function if you want to fetch the balance of the user that is currently logged in.
 
     MzaaloRewards.getBalance()
+    .then(response => {
+    	// You will get response as balance of the user
+    	balance : response
+    })
+    .catch(error => {
+    	error : error
+    })
 
 ## Sequence Flow
 ### mzaalo-auth
