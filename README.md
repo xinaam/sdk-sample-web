@@ -27,8 +27,10 @@ Both these modules are shippable under one javascript library. You can call `ini
 
 ### Configuration
 Add `mzaalo-sdk` to the script tag in your code:
-
-   <script src = 'http://sdk.mzaalo.com/dist/mzaalo-sdk.min.js' ></script>
+    <script src = 'http://sdk.mzaalo.com/dist/mzaalo-sdk.min.js' ></script>
+  
+If you're using `npm-modules` then install `mzaalo-web-sdks` from npmjs and then add in your code:
+    import { MzaaloAuth, MzaaloRewards } from 'mzaalo-web-sdks'
 
 ## Getting Started
     
