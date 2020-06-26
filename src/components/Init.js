@@ -22,7 +22,7 @@ function Init (props) {
             return ToastsStore.error("Fields cannot be blank")
         MzaaloAuth.init(partnerCode, mzaaloEnvironment)
         .then(res => {
-            ToastsStore.success("Init Successfully")
+            ToastsStore.success("Initialize Successfully")
             setShowInitSuccessMsg(true)
         })
         .catch (error => ToastsStore.error(error))

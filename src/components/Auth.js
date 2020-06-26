@@ -8,32 +8,46 @@ function Auth (props) {
     const reducer = (state, newState) => ({ ...state, ...newState});
     const [loginDetails, setLoginDetails] = useReducer(reducer, {
         unique_id : '',
-        email : '',
-        country_code : '',
-        mobile_number : '',
+        userMeta : {},
     })
 
     const onChange = (e) => {
         setLoginDetails ({ [e.target.name] : e.target.value })
     }
+
+    const isValideJSON = (userMeta) => {
+       try {
+           JSON.parse(userMeta)
+       } catch (e) {
+           return false;
+       }
+       return true;
+    }
     
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(loginDetails)
+
         if (!loginDetails.unique_id) {
-            return ToastsStore.error("Fields cannot be blank")
+            return ToastsStore.error("Unique ID cannot be blank")
         }
-        const userMeta = {
-            email: loginDetails.email || '',
-            country_code: loginDetails.country_code || '',
-            mobile_number: loginDetails.mobile_number || ''
-        };
-        MzaaloAuth.login(loginDetails.unique_id, userMeta)
+
+        if (loginDetails.userMeta.length > 0 && !isValideJSON(loginDetails.userMeta)) {
+            return ToastsStore.error("Invalid JSON Object")
+        }
+
+        var parsedUserMeta = loginDetails.userMeta;
+        if (loginDetails.userMeta.length > 0) {
+            parsedUserMeta = JSON.parse(loginDetails.userMeta);
+        }        
+
+        MzaaloAuth.login(loginDetails.unique_id, parsedUserMeta)
         .then(res => {
             ToastsStore.success('Login Successfully')
             setShowAuthSuccessMsg(true)
         })
-        .catch(error => ToastsStore.error(error))
+        .catch(error => {
+            ToastsStore.error(error)
+        })
     }
 
     return (
@@ -49,6 +63,11 @@ function Auth (props) {
                 <input type="text" name="unique_id" id="unique_id" placeholder="Enter Unique User ID" onChange={onChange} />
             </div>
             <div className="form-control">
+                <label>User Meta Object</label>
+                <textarea name="userMeta" id="userMeta" rows={3} placeholder="Enter User Meta JSON Object" onChange={onChange} />
+            </div>
+            
+            {/* <div className="form-control">
                 <label>Email</label>
                 <input type="email" name="email" id="email" placeholder="Enter User Email Address" onChange={onChange} />
             </div>
@@ -59,7 +78,7 @@ function Auth (props) {
             <div className="form-control">
                 <label>Mobile Number</label>
                 <input type="number" name="mobile_number" id="mobile_number" placeholder="Enter Mobile Number" onChange={onChange} />
-            </div>
+            </div> */}
             <button className="btn btn-main">Login</button>
         </form>
         }

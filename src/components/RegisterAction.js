@@ -5,27 +5,43 @@ import { ToastsContainer, ToastsStore } from 'react-toasts';
 function RegisterAction (props) {
 
     const [rewardActionType, setRewardActionType] = useState('');
-    const [metaData, setMetaData] = useState('');
+    const [eventMeta, setEventMeta] = useState({});
     const [showRegisterRewardMsg, setShowRegisterRewardMsg] = useState(false);
 
     const onActionTypeChange = (e) => {
         setRewardActionType(e.target.value)
     }
 
-    const onMetaDataChange = (e) => {
-        setMetaData(e.target.value)
+    const onEventMetaChange = (e) => {
+        setEventMeta(e.target.value)
     }
+
+    const isValideJSON = (eventMeta) => {
+        try {
+            JSON.parse(eventMeta)
+        } catch (e) {
+            return false;
+        }
+        return true;
+     }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // const metaKey = getEventMetaData(rewardActionType);
-        let eventMeta = {
-            meta : {
-                metaKey : metaData
-            }
+
+        if (!rewardActionType) {
+            return ToastsStore.error('Please Select Reward Action Type')
         }
-        console.log(rewardActionType, eventMeta)
-        MzaaloRewards.registerRewardAction(rewardActionType, eventMeta)
+
+        if (eventMeta.length > 0 && !isValideJSON(eventMeta)) {
+            return ToastsStore.error("Invalid JSON Object")
+        }
+
+        var parsedEventMeta = eventMeta;
+        if (eventMeta.length > 0) {
+            parsedEventMeta = JSON.parse(eventMeta);
+        }
+
+        MzaaloRewards.registerRewardAction(rewardActionType, parsedEventMeta)
         .then(res => {
             setShowRegisterRewardMsg(true)
             ToastsStore.success("Action Registered Successfully")
@@ -34,15 +50,17 @@ function RegisterAction (props) {
 
     }
 
-    function getEventMetaData (actionType) {
-        switch (actionType) {
-            case 'CONTENT_VIEWED' : return 'total_watch_time';
-            case 'CHECKED_IN' : return null;
-            case 'SIGN_UP' : return null;
-            case 'REFERRAL_APPLIED' : return 'referee_user_id';
-            default : return null;
-        }
-    }
+    // Function return true if need to have json object else return false
+    // function getEventMetaData (actionType) {
+    //     switch (actionType) {
+    //         case 'CONTENT_VIEWED' : return true;
+    //         case 'CHECKED_IN' : return false;
+    //         case 'SIGNED_UP' : return false;
+    //         case 'REFERRAL_APPLIED' : return true;
+    //         default : return false;
+    //     }
+    // }
+
 
     return (
         <>
@@ -65,22 +83,18 @@ function RegisterAction (props) {
                                 <option value="CHECKED_IN">
                                     CHECKED_IN
                                 </option>
-                                <option value="SIGN_UP">
-                                    SIGN_UP
+                                <option value="SIGNED_UP">
+                                    SIGNED_UP
                                 </option>
                                 <option value="REFERRAL_APPLIED">
                                     REFERRAL_APPLIED
                                 </option>
                             </select>
+                        </div> 
+                        <div className="form-control">
+                            <label>Event Meta Object</label>
+                            <textarea name="eventMeta" id="eventMeta" rows={3} placeholder="Enter Event Meta JSON Object" onChange={onEventMetaChange} />
                         </div>
-                        {
-                            getEventMetaData(rewardActionType) !== null ? 
-                            <div className="form-control">
-                                <label>{getEventMetaData(rewardActionType)}</label>
-                                <input type="text" name="metaData" id="metaData" placeholder="Enter Meta Data Value" onChange={onMetaDataChange} />
-                            </div>
-                            : null
-                        }
                         <button className="btn btn-main">Register</button>
                     </form>
             }
