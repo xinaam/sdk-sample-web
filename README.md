@@ -46,10 +46,10 @@ The entry point to the SDK is through the `init` function that gets called with 
     	error : error
     })
 
-Here `MzaaloEnvironment` is an enum class with the following options:
+Here `MzaaloEnvironment` can be the following options:
 
- - **MzaaloEnvironment.STAGING**
- - **MzaaloEnvironment.PRODUCTION**
+ - **STAGING**
+ - **PRODUCTION**
 
 
 ## Features and Implementation
@@ -76,6 +76,16 @@ Here are the valid `userProperty` fields that can put as keys in the `userMeta` 
 |phone|Phone number of the user|String|9876543210|
 |country_code|Country code of the user's phone number|String|+91, +44|
 
+### isLoggedIn
+You can call `MzaaloAuth.isLoggedIn()` function to check whether user is logged in or not.
+
+	MzaaloAuth.isLoggedIn()
+	.then(response => {
+		// You will get object { success : true, message : 'Logged In', data : user }
+	})
+	.catch(error => {
+		// You will get error object
+	})
 
 ### Logout
 Your application should call `MzaaloAuth.logout()` function when the user logs out from your application or when the user identitiy is no longer available to you.
