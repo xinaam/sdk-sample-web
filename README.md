@@ -106,7 +106,7 @@ This is a feature that allows the application to register an action to the Mzaal
     	[eventProperty] : value
     }
     
-    MzaaloRewards.registerRewardAction(MzaaloRewardsActionTypes.XXXX, eventMeta)
+    MzaaloRewards.registerRewardAction(MzaaloRewardsActionTypes, eventMeta)
     .then(response => {
     	// you will get success response
     })
@@ -114,13 +114,13 @@ This is a feature that allows the application to register an action to the Mzaal
     	error : error
     })
 
-`MzaaloRewardsActionTypes` is an enum class that describes the type of action that the user has performed. The enum has following options:
-| Enum Value | Description |
+`MzaaloRewardsActionTypes` is a string that describes the type of action that the user has performed. The string has following options:
+| Value | Description |
 |--|--|
-| `MzaaloRewardsActionTypes.CONTENT_VIEWED` | Send this if you want to give rewards to the user for watching content |
-| `MzaaloRewardsActionTypes.CHECKED_IN` | Send this if you want to give rewards to the user for **launching the app** or **visiting some section of the app** on a daily basis |
-| `MzaaloRewardsActionTypes.SIGNED_UP` | Send this if you want to give reward to the user for signing up on your application. In this case, call this once the above mentioned login function has been successfully executed. |
-| `MzaaloRewardsActionTypes.REFERRAL_APPLIED` | When a user applies a referral code on the platform which he/she received from some other user previously. This will credit the rewards to the user who referred the current user. |
+| `CONTENT_VIEWED` | Send this if you want to give rewards to the user for watching content |
+| `CHECKED_IN` | Send this if you want to give rewards to the user for **launching the app** or **visiting some section of the app** on a daily basis |
+| `SIGNED_UP` | Send this if you want to give reward to the user for signing up on your application. In this case, call this once the above mentioned login function has been successfully executed. |
+| `REFERRAL_APPLIED` | When a user applies a referral code on the platform which he/she received from some other user previously. This will credit the rewards to the user who referred the current user. |
 
 Here are the valid `eventProperty` fields that can be put as keys in the `eventMeta` json:
 | eventProperty | MzaaloRewardsActionTypes | Description | Data type | Example |
