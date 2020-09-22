@@ -28,7 +28,7 @@ Both these modules are shippable under one javascript library. You can call `ini
 ### Configuration
 Add `mzaalo-sdk` to the script tag in your code:
 
-	<script src = 'http://sdk.mzaalo.com/dist/mzaalo-sdk.min.js' ></script>
+	<script src = 'https://sdk.mzaalo.com/dist/mzaalo-sdk.min.js' ></script>
   
 If you're using `npm-modules` then install `mzaalo-web-sdks` from npmjs and then add in your code:
 
