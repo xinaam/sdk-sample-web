@@ -35,7 +35,7 @@ const steps = [
 ];
 
 const Home: NextPage = () => {
-  const [activeStep, setActiveStep] = useState(8);
+  const [activeStep, setActiveStep] = useState(0);
   const [allowProceed, setAllowProceed] = useState(false);
   const getStepContent = (step: number) => {
     switch (step) {
