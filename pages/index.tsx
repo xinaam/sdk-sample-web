@@ -8,7 +8,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Init from "../components/Init";
@@ -21,6 +21,7 @@ import ChangeUserType from "../components/ChangeUserType";
 import GetBalance from "../components/GetBalance";
 import GetTransactionHistory from "../components/GetTransactionHistory";
 import GetRewardOffers from "../components/GetRewardOffers";
+import { sdkURL } from "../config";
 
 const steps = [
   "Initialize the SDK",
@@ -35,6 +36,9 @@ const steps = [
 ];
 
 const Home: NextPage = () => {
+  useEffect(() => {
+    if (!window.MzaaloSDK) toast.error("Mzaalo SDK not found");
+  }, []);
   const [activeStep, setActiveStep] = useState(0);
   const [allowProceed, setAllowProceed] = useState(false);
   const getStepContent = (step: number) => {
@@ -79,7 +83,7 @@ const Home: NextPage = () => {
         <title>Mzaalo Web SDK</title>
       </Head>
       <ToastContainer position="bottom-right" />
-      <Script src="mzaalo-sdk.js"></Script>
+      <Script crossorigin="anonymous" src={sdkURL}></Script>
       <div className={styles.container}>
         <h1 className={styles.title}>Mzaalo SDK Demo</h1>
         <main className={styles.main}>
